@@ -123,7 +123,7 @@ class BandeiraBrasil(Scene):
             .shift(UP*2.8)
 
         expl_v = Tex(
-            r"Área verde = Área do retângulo - Área do losango",
+            r"Área verde = Área do retângulo $-$ Área do losango",
             font_size=28,
         ).next_to(sec5, DOWN, buff=0.4)
 
@@ -144,32 +144,37 @@ class BandeiraBrasil(Scene):
         ).shift(UP*2.8)
 
         eq_amar = MathTex(
-            r"A_{\text{amar}} = 4{.}948\,\text{cm}^2",
+            r"A_{\text{amar}} = A_{\text{los}} - A_{\text{cir}} = 4{.}948\,\text{cm}^2",
             font_size=32,
-        )
+        ).next_to(sec6, DOWN, buff=0.5)
 
         eq_porc = MathTex(
-            r"\approx 17{,}67\%",
+            r"\frac{4{.}948}{28{.}000} \times 100 \approx 17{,}67\%",
             font_size=34,
-        )
+        ).next_to(eq_amar, DOWN, buff=0.45)
 
         self.play(Write(sec6))
         self.play(Write(eq_amar))
         self.play(Write(eq_porc))
         self.wait(2)
+        self.play(FadeOut(sec6), FadeOut(eq_amar), FadeOut(eq_porc))
 
         # ── Cena 8: resumo final
-        resumo_title = Tex(r"\textbf{Respostas}", font_size=36)
+        resumo_title = Tex(r"\textbf{Respostas}", font_size=36).shift(UP*2.8)
 
         resp_a = MathTex(
-            r"\text{Área verde} = 19{.}202\,\text{cm}^2",
+            r"\text{a)}\quad A_{\text{verde}} = 19{.}202\,\text{cm}^2",
             font_size=34, color=VERDE,
         )
 
         resp_b = MathTex(
-            r"\text{Área amarela} \approx 17{,}67\%",
+            r"\text{b)}\quad A_{\text{amarela}} \approx 17{,}67\%\ \text{do total}",
             font_size=34, color=AMARELO,
         )
+
+        # FIX: objetos organizados em coluna com arrange 
+        respostas = VGroup(resp_a, resp_b).arrange(DOWN, buff=0.5)\
+            .next_to(resumo_title, DOWN, buff=0.6)
 
         self.play(Write(resumo_title))
         self.play(Write(resp_a))
